@@ -9,9 +9,9 @@ submitBtn.addEventListener('click', onSubmit);
 
 function onSubmit(e) {
   e.preventDefault();
-  for (let i = 0; i < Number(amount.value); i += 1) {
+  for (let i = 0; i < +amount.value; i += 1) {
     let position = i + 1;
-    let delay = Number(firstDelay.value) + i * Number(step.value);
+    let delay = +firstDelay.value + i * +step.value;
     
     createPromise(position, delay)
       .then(({ position, delay }) => {

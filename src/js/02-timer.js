@@ -10,16 +10,16 @@ const hoursInput = document.querySelector('[data-hours]');
 const minutesInput = document.querySelector('[data-minutes]');
 const secondsInput = document.querySelector('[data-seconds]');
 
-const currentDate = new Date();
 let timerId = 0;
 
-const selector = document.querySelector('#datetime-picker');
-let calendar = flatpickr(selector, {
+// const selector = document.querySelector('#datetime-picker');
+let calendar = flatpickr('#datetime-picker', {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
+    const currentDate = new Date();
     if (selectedDates[0] < currentDate) {
       Notify.failure('Please choose a date in the future');
       return;
@@ -39,7 +39,7 @@ function setTimer() {
   timerId = setInterval(() => {
     currentTime = Date.now();
     if (timerTime < currentTime) {
-      stopTimer;
+      stopTimer();
       return;
     }
     remainingTime = convertMs(timerTime - currentTime);
@@ -52,7 +52,7 @@ function setTimer() {
 
 function stopTimer() {
   clearInterval(timerId);
-  startBtn.disabled = true;
+  // startBtn.disabled = true;
 }
 
 function convertMs(ms) {
