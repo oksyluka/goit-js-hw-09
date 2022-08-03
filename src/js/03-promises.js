@@ -9,10 +9,10 @@ submitBtn.addEventListener('click', onSubmit);
 
 function onSubmit(e) {
   e.preventDefault();
-  for (let i = 0; i < +amount.value; i += 1) {
-    let position = i + 1;
-    let delay = +firstDelay.value + i * +step.value;
-    
+  let delay = +firstDelay.value;
+  for (let i = 1; i <= +amount.value; i += 1) {
+    let position = i;
+
     createPromise(position, delay)
       .then(({ position, delay }) => {
         Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -20,6 +20,7 @@ function onSubmit(e) {
       .catch(({ position, delay }) => {
         Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
+    delay += +step.value;
   }
 }
 
